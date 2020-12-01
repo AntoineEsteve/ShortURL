@@ -1,13 +1,17 @@
-import Koa from 'koa'
 import cors from '@koa/cors'
-import Router from 'koa-router'
 import { ApolloServer } from 'apollo-server-koa'
+import Koa from 'koa'
+import Router from 'koa-router'
+import serveStatic from 'koa-static'
+import path from 'path'
 import 'reflect-metadata'
 import { buildSchema } from 'type-graphql'
-import { ShortUrlResolver } from './resolvers/shorturl'
 import { contextFunction } from './context'
 import { prismaClient } from './prisma-client'
+import { ShortUrlResolver } from './resolvers/shorturl'
 import { UserResolver } from './resolvers/user'
+
+const port = process.env.PORT ?? 4000
 
 async function startServer() {
     const schema = await buildSchema({
@@ -35,11 +39,16 @@ async function startServer() {
     const app = new Koa()
     app.use(cors())
     app.use(apolloServer.getMiddleware())
+    app.use(serveStatic(path.join(__dirname, '../../frontend/build')))
+    console.log(
+        'Serving static files from',
+        path.join(__dirname, '../frontend/build'),
+    )
     app.use(router.routes())
     app.use(router.allowedMethods())
-    app.listen({ port: 4000 }, () =>
+    app.listen({ port }, () =>
         console.log(
-            `🚀 Server ready at http://localhost:4000${apolloServer.graphqlPath}`,
+            `🚀 Server ready at http://localhost:${port}${apolloServer.graphqlPath}`,
         ),
     )
 }

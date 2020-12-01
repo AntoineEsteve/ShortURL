@@ -2,32 +2,41 @@
 
 ShortURL is a URL shortener web app built from scratch for a technical interview at Ambler.
 
-## Development
+## Usage
 
 Install the dependencies:
 
 ```sh
 npm install
-npx lerna bootstrap
 ```
 
-For local development please create and initialize a sqlite3 database:
+Initialize database:
 
 ```sh
+cd packages/backend
 npx sqlite3 sqlite3.db
 sqlite> .read ./prisma/init.sql
 ```
 
-Build/run the backend:
+Build the packages:
 
 ```sh
-cd packages/backend
-npm run build && npm run start
+npm run build
 ```
+
+Start the backend which also serve the frontend:
+
+```sh
+npm run start
+```
+
+App: http://localhost:4000
 
 GraphQL playground: http://localhost:4000/graphql
 
-Build/serve the frontend (in another tab):
+### Contributing
+
+If you want to edit the frontend you should run webpack instead:
 
 ```sh
 cd packages/frontend
