@@ -82,7 +82,7 @@ _Please note that I used this interview to test libraries (Prisma2, TypeGraphQL,
 
 ## Timeline
 
-Total time: 13.5 hours
+Total time: ~14 hours
 
 ### Monday Nov. 30th
 
@@ -95,7 +95,7 @@ Total time: 13.5 hours
 -   6 PM: Frontend configured with create-react-app, MaterialUI and Apollo Client
 -   8 PM: App mostly working
 
-Total: 10 hours
+Total: ~10 hours
 
 ### Tuesday Dec. 1st
 
@@ -104,9 +104,9 @@ Total: 10 hours
 -   11AM-1PM: Break
 -   2 PM: Use herko for hosting
 -   3PM: Change DB to postgresql for dev/demo env (because prisma only support one provider)
--   3:30 PM: Final state
+-   4 PM: Final state
 
-Total: 3.5 hours
+Total: ~4 hours
 
 ## Things missing
 
