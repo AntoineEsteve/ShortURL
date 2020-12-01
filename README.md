@@ -10,12 +10,22 @@ Install the dependencies:
 npm install
 ```
 
-Initialize database:
+For local testing, you need to have postgresql installed. Then please create a database `shorturl`, an super admin with name `shorturl` and password `shorturl` too:
+
+```console
+➜  backend git:(main) ✗ sudo -u postgres -i
+postgres@antoine-aero:~$ createuser --interactive --pwprompt
+Enter name of role to add: shorturl
+Enter password for new role:
+Enter it again:
+Shall the new role be a superuser? (y/n) y
+postgres@antoine-aero:~$ createdb shorturl
+```
+
+You also need to init the database:
 
 ```sh
-cd packages/backend
-npx sqlite3 sqlite3.db
-sqlite> .read ./prisma/init.sql
+psql postgresql://shorturl:shorturl@localhost:5432/shorturl -f packages/backend/prisma/init.sql
 ```
 
 Build the packages:
@@ -55,7 +65,7 @@ App: http://localhost:3000
     -   Koa
     -   Prisma2
     -   TypeGraphQL
-    -   sqlite3 (for development but can connect to any SQL database compatible with Prisma2)
+    -   postgresql
 -   Frontend:
     -   Typescript
     -   React
@@ -67,6 +77,8 @@ App: http://localhost:3000
 _Please note that I used this interview to test libraries (Prisma2, TypeGraphQL, Apollo) and I didn't use them beforehand. So the configuration is probably not optimal._
 
 ## Timeline
+
+Total time: 13.5 hours
 
 ### Monday Nov. 30th
 
@@ -85,6 +97,12 @@ Total: 10 hours
 
 -   10 AM: Start
 -   11 AM: Authentication rebuilt to be fully automatic and transparent for the user
+-   11AM-1PM: Break
+-   2 PM: Use herko for hosting
+-   3PM: Change DB to postgresql for dev/demo env (because prisma only support one provider)
+-   3:30 PM: Final state
+
+Total: 3.5 hours
 
 ## Things missing
 
