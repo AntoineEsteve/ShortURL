@@ -9,7 +9,7 @@ export class User {
 @ObjectType()
 export class AnonymousSignInResponse {
     @Field(() => Int)
-    userId!: number
+    userid!: number
 
     @Field(() => String)
     token!: string

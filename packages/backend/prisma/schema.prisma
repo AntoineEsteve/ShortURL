@@ -8,8 +8,8 @@ datasource db {
 }
 
 model User {
-  id       Int        @id @default(autoincrement())
-  ShortUrl ShortUrl[]
+  id        Int        @id @default(autoincrement())
+  shorturls ShortUrl[] @relation("shorturlsTousers")
 
   @@map("users")
 }
@@ -17,8 +17,8 @@ model User {
 model ShortUrl {
   id     Int    @id @default(autoincrement())
   url    String
-  userId Int?
-  User   User?  @relation(fields: [userId], references: [id])
+  userid Int?
+  user   User?  @relation("shorturlsTousers", fields: [userid], references: [id])
 
   @@map("shorturls")
 }

@@ -15,7 +15,7 @@ import { copyInputValueToClipboard } from '../utils/clipboard'
 import { createUrlFromShortUrlId } from '../utils/string/url-from-id'
 
 export const ShortUrlHistoryItem = memo<{
-    shortUrl: { id: number; url: string; userId?: string }
+    shortUrl: { id: number; url: string; userid?: string }
 }>(({ shortUrl }) => {
     const [deleteShortUrl] = useMutation(deleteShortUrlMutation)
     const shortUrlInputRef = useRef<HTMLInputElement>(null)
@@ -33,7 +33,7 @@ export const ShortUrlHistoryItem = memo<{
             ],
         })
     }, [deleteShortUrl, shortUrl.id])
-    const userId = useContext(UserIdContext)
+    const userid = useContext(UserIdContext)
     return (
         <TableRow key={shortUrl.id}>
             <TableCell component='th' scope='row'>
@@ -74,7 +74,7 @@ export const ShortUrlHistoryItem = memo<{
                             <FileCopyIcon />
                         </IconButton>
                     </Box>
-                    {userId === shortUrl.userId ? (
+                    {userid === shortUrl.userid ? (
                         <Box flex='0 0 auto' minWidth={0} mt={1} ml={1}>
                             <IconButton onClick={deleteOnClick}>
                                 <DeleteIcon />

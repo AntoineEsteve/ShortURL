@@ -5,7 +5,7 @@ export const createShortUrlMutation = gql`
         createShortUrl(url: $url) {
             id
             url
-            userId
+            userid
         }
     }
 `

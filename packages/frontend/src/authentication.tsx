@@ -21,7 +21,7 @@ export const AuthenticationWrapper: FC = ({ children }) => {
     const [anonymousSignIn, { data, error }] = useMutation(
         anonymousSignInMutation,
     )
-    const userId = data?.anonymousSignIn?.userId
+    const userid = data?.anonymousSignIn?.userid
     useEffect(
         () =>
             void anonymousSignIn().then(({ data }) => {
@@ -36,8 +36,8 @@ export const AuthenticationWrapper: FC = ({ children }) => {
         <Alert severity='error'>
             Error: We could not connect to the server, please retry later!
         </Alert>
-    ) : userId ? (
-        <UserIdContext.Provider value={userId}>
+    ) : userid ? (
+        <UserIdContext.Provider value={userid}>
             {children}
         </UserIdContext.Provider>
     ) : null

@@ -4,6 +4,6 @@ CREATE TABLE IF NOT EXISTS users (
 CREATE TABLE IF NOT EXISTS shorturls (
     id SERIAL PRIMARY KEY,
     url TEXT NOT NULL,
-    userId INTEGER,
-    FOREIGN KEY (userId) REFERENCES users (id)
+    userid INTEGER,
+    FOREIGN KEY (userid) REFERENCES users (id)
 );

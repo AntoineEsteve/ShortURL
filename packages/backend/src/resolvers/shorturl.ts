@@ -44,7 +44,7 @@ export class ShortUrlResolver {
             ...(onlyUser && context.user
                 ? {
                       where: {
-                          userId: context.user.id,
+                          userid: context.user.id,
                       },
                   }
                 : {}),
@@ -63,7 +63,7 @@ export class ShortUrlResolver {
                 url,
                 ...(context.user
                     ? {
-                          User: {
+                          user: {
                               connect: {
                                   id: context.user.id,
                               },
@@ -88,7 +88,7 @@ export class ShortUrlResolver {
             await context.prismaClient.shortUrl.deleteMany({
                 where: {
                     id,
-                    userId: context.user.id,
+                    userid: context.user.id,
                 },
             })
             return true

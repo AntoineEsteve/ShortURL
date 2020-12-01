@@ -9,5 +9,5 @@ export class ShortUrl {
     url!: string
 
     @Field(() => Int, { nullable: true })
-    userId!: number | null
+    userid!: number | null
 }

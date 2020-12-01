@@ -5,7 +5,7 @@ export const listShortUrlsQuery = gql`
         listShortUrls(onlyUser: $onlyUser) {
             id
             url
-            userId
+            userid
         }
     }
 `

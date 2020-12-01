@@ -15,8 +15,8 @@ export class UserResolver {
         if (!context.user) {
             const user = await context.prismaClient.user.create({ data: {} })
             const token = jsonwebtoken.sign(user, authenticationSecret)
-            return { token, userId: user.id }
+            return { token, userid: user.id }
         }
-        return { token: context.token!, userId: context.user.id }
+        return { token: context.token!, userid: context.user.id }
     }
 }
