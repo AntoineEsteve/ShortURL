@@ -1,0 +1,24 @@
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "sqlite"
+  url      = env("DATABASE_URL")
+}
+
+model User {
+  id       Int        @id @default(autoincrement())
+  ShortUrl ShortUrl[]
+
+  @@map("users")
+}
+
+model ShortUrl {
+  id     Int    @id @default(autoincrement())
+  url    String
+  userId Int?
+  User   User?  @relation(fields: [userId], references: [id])
+
+  @@map("shorturls")
+}
