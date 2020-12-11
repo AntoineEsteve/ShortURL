@@ -7,7 +7,7 @@ import {
     Resolver,
     UnauthorizedError,
 } from 'type-graphql'
-import { Context } from '../context'
+import { Context } from '../../context'
 import { ShortUrl } from '../models/shorturl'
 
 @Resolver()

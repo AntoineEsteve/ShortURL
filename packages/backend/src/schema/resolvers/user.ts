@@ -1,7 +1,7 @@
 import jsonwebtoken from 'jsonwebtoken'
 import { Ctx, Mutation, Resolver } from 'type-graphql'
-import { authenticationSecret } from '../authentication'
-import { Context } from '../context'
+import { authenticationSecret } from '../../authentication'
+import { Context } from '../../context'
 import { AnonymousSignInResponse } from '../models/user'
 
 @Resolver()

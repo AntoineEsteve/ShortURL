@@ -4,20 +4,13 @@ import Koa from 'koa'
 import Router from 'koa-router'
 import serveStatic from 'koa-static'
 import path from 'path'
-import 'reflect-metadata'
-import { buildSchema } from 'type-graphql'
 import { contextFunction } from './context'
 import { prismaClient } from './prisma-client'
-import { ShortUrlResolver } from './resolvers/shorturl'
-import { UserResolver } from './resolvers/user'
+import { schema } from './schema'
 
 const port = process.env.PORT ?? 4000
 
 async function startServer() {
-    const schema = await buildSchema({
-        resolvers: [ShortUrlResolver, UserResolver],
-    })
-
     const apolloServer = new ApolloServer({ schema, context: contextFunction })
 
     const router = new Router()
