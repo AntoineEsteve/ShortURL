@@ -1,19 +1,27 @@
 import Box from '@material-ui/core/Box'
 import Container from '@material-ui/core/Container'
+import List from '@material-ui/core/List'
+import ListItem from '@material-ui/core/ListItem'
 import Paper from '@material-ui/core/Paper'
-import Table from '@material-ui/core/Table'
-import TableBody from '@material-ui/core/TableBody'
-import TableCell from '@material-ui/core/TableCell'
-import TableContainer from '@material-ui/core/TableContainer'
-import TableHead from '@material-ui/core/TableHead'
-import TableRow from '@material-ui/core/TableRow'
+import { createStyles, makeStyles, Theme } from '@material-ui/core/styles'
 import Typography from '@material-ui/core/Typography'
 import React, { memo } from 'react'
 import { useListShortUrlsQuery } from '../graphql/codegen'
 import { theme } from '../style/theme'
 import { ShortUrlHistoryItem } from './shorturl-history-item'
 
+const useStyles = makeStyles((theme: Theme) =>
+    createStyles({
+        list: {
+            borderRadius: 4,
+            color: theme.palette.text.primary,
+            backgroundColor: theme.palette.background.paper,
+        },
+    }),
+)
+
 export const ShortUrlHistory = memo<{ onlyUser: boolean }>(({ onlyUser }) => {
+    const classes = useStyles()
     const { loading, data } = useListShortUrlsQuery({
         pollInterval: 3000,
         variables: {
@@ -35,26 +43,16 @@ export const ShortUrlHistory = memo<{ onlyUser: boolean }>(({ onlyUser }) => {
                     <Typography variant='h4' gutterBottom align='center'>
                         {onlyUser ? 'Your history' : 'Last URLs created'}
                     </Typography>
-                    <TableContainer component={Paper}>
-                        <Table>
-                            <TableHead>
-                                <TableRow>
-                                    <TableCell>URL</TableCell>
-                                    <TableCell align='right'>
-                                        ShortURL / Actions
-                                    </TableCell>
-                                </TableRow>
-                            </TableHead>
-                            <TableBody>
-                                {data.listShortUrls.map((shortUrl: any) => (
-                                    <ShortUrlHistoryItem
-                                        key={shortUrl.id}
-                                        shortUrl={shortUrl}
-                                    />
-                                ))}
-                            </TableBody>
-                        </Table>
-                    </TableContainer>
+                    <List className={classes.list}>
+                        {data.listShortUrls.map((shortUrl, index) => (
+                            <ListItem
+                                key={shortUrl.id}
+                                divider={index < data.listShortUrls.length - 1}
+                            >
+                                <ShortUrlHistoryItem shortUrl={shortUrl} />
+                            </ListItem>
+                        ))}
+                    </List>
                 </Box>
             </Container>
         </Box>

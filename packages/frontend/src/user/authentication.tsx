@@ -1,7 +1,7 @@
 import { ApolloLink } from '@apollo/client'
 import Alert from '@material-ui/lab/Alert'
 import { createContext, FC, useEffect } from 'react'
-import { useAnonymousSignInMutation } from './graphql/codegen'
+import { useAnonymousSignInMutation } from '../graphql/codegen'
 
 export const UserIdContext = createContext<number>(0)
 

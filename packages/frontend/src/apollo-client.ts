@@ -1,5 +1,5 @@
 import { ApolloClient, HttpLink, InMemoryCache } from '@apollo/client'
-import { authenticationLink } from './authentication'
+import { authenticationLink } from './user/authentication'
 import './style/global.css'
 
 const httpLink = new HttpLink({
