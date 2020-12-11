@@ -88,41 +88,6 @@ npm run codegen
 
 _Please note that I used this interview to test libraries (Prisma2, TypeGraphQL, Apollo) and I didn't use them beforehand. So the configuration is probably not optimal._
 
-## Timeline
-
-Total time: ~15 hours
-
-### Monday Nov. 30th
-
--   8 AM: Start
--   8-9 AM: Monorepo, typescript and sqlite3 configured
--   9:30 AM: Prisma set up
--   12 PM: Apollo and type-graphql set up; first model and resolvers created
--   12-2 PM: Break
--   3 PM: Backend fully working + authentication
--   6 PM: Frontend configured with create-react-app, MaterialUI and Apollo Client
--   8 PM: App mostly working
-
-Total: ~10 hours
-
-### Tuesday Dec. 1st
-
--   10 AM: Start
--   11 AM: Authentication rebuilt to be fully automatic and transparent for the user
--   11AM-1PM: Break
--   2 PM: Use herko for hosting
--   3PM: Change DB to postgresql for dev/demo env (because prisma only support one provider)
--   4 PM: Final state
-
-Total: ~4 hours
-
-### Friday Dec. 11th
-
--   2PM: Add graphql-code-generator to generate Typescript types from the schema for the frontend
--   2:30PM: Minor UI improvements
-
-Total: ~1 hour
-
 ## Things missing
 
 -   Unit tests (as I didn't know most of those libs I don't know the best practices to test them)
