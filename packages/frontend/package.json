@@ -1,5 +1,5 @@
 {
-  "name": "@ambler-shorturl/frontend",
+  "name": "@shorturl/frontend",
   "version": "1.0.0",
   "private": true,
   "dependencies": {

@@ -1,10 +1,10 @@
 # ShortURL
 
-ShortURL is a URL shortener web app built from scratch for a technical interview at Ambler.
+ShortURL is a URL shortener web app built from scratch for a technical interview.
 
 ## Demo
 
-The app is hosted on Heroku which automatically deploy the branch `main`: https://ambler-shorturl.herokuapp.com/
+The app is hosted on Heroku which automatically deploy the branch `main`: https://shorturl-demo.herokuapp.com/
 
 ## Usage
 
