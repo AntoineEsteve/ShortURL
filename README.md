@@ -48,7 +48,7 @@ App: http://localhost:4000
 
 GraphQL playground: http://localhost:4000/graphql
 
-### Contributing
+## Contributing
 
 If you want to edit the frontend you should run webpack instead:
 
@@ -66,6 +66,14 @@ cd packages/frontend
 npm run codegen
 ```
 
+## Tests
+
+Both the frontend and the backend packages are configured to use Jest.
+
+You can run the tests by running `npm run test` in the package folder.
+
+Note: There are no frontend tests implemented yet.
+
 ## Stack
 
 -   Backend:
@@ -78,6 +86,7 @@ npm run codegen
     -   Prisma2
     -   TypeGraphQL
     -   postgresql
+    -   Jest
 -   Frontend:
     -   Typescript
     -   React
@@ -85,13 +94,11 @@ npm run codegen
     -   GraphQL
     -   Apollo
     -   Material UI
-
-_Please note that I used this interview to test libraries (Prisma2, TypeGraphQL, Apollo) and I didn't use them beforehand. So the configuration is probably not optimal._
+    -   Jest
 
 ## Things missing
 
--   Unit tests (as I didn't know most of those libs I don't know the best practices to test them)
+-   More unit tests
 -   Handle errors & loading states
 -   Use subscriptions instead of pooling to refresh the lists
 -   Update the cache when deleting/adding ShortURLs instead of refetching everything
--   Improve the UI to support smaller devices (<550px width) and to have better
