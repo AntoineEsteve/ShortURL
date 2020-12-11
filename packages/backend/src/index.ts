@@ -1,44 +1,36 @@
 import cors from '@koa/cors'
 import { ApolloServer } from 'apollo-server-koa'
 import Koa from 'koa'
-import Router from 'koa-router'
 import serveStatic from 'koa-static'
 import path from 'path'
 import { contextFunction } from './context'
-import { prismaClient } from './prisma-client'
+import { createRouter } from './rest-router'
 import { schema } from './schema'
 
 const port = process.env.PORT ?? 4000
 
 async function startServer() {
-    const apolloServer = new ApolloServer({ schema, context: contextFunction })
-
-    const router = new Router()
-    // Redirect shorturls to their corresponding URLs if they exists
-    router.get('/:id', async (ctx, next) => {
-        const id = parseInt(ctx.params.id, 36)
-        if (!Number.isInteger(id)) {
-            return next()
-        }
-        const shortUrl = await prismaClient.shortUrl.findFirst({
-            where: { id },
-        })
-        if (shortUrl?.url) {
-            ctx.redirect(shortUrl?.url)
-        }
-        return next()
-    })
-
     const app = new Koa()
     app.use(cors())
+
+    // GraphQL endpoints
+    const apolloServer = new ApolloServer({ schema, context: contextFunction })
     app.use(apolloServer.getMiddleware())
+
+    // Serve static files
+    // It's used to deploy the app on heroku (the backend serve the frontend)
+    // A better solution would be to use a static hosting (e.g. S3)
     app.use(serveStatic(path.join(__dirname, '../../frontend/build')))
     console.log(
         'Serving static files from',
         path.join(__dirname, '../frontend/build'),
     )
+
+    // Other endpoints
+    const router = createRouter()
     app.use(router.routes())
     app.use(router.allowedMethods())
+
     app.listen({ port }, () =>
         console.log(
             `🚀 Server ready at http://localhost:${port}${apolloServer.graphqlPath}`,
