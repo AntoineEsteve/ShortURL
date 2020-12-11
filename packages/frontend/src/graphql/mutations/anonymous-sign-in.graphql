@@ -1,0 +1,6 @@
+mutation AnonymousSignIn {
+    anonymousSignIn {
+        userid
+        token
+    }
+}

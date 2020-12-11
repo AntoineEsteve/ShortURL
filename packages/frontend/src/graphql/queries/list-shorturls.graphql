@@ -1,0 +1,7 @@
+query ListShortUrls($onlyUser: Boolean!) {
+    listShortUrls(onlyUser: $onlyUser) {
+        id
+        url
+        userid
+    }
+}

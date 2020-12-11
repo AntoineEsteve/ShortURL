@@ -1,4 +1,3 @@
-import { useQuery } from '@apollo/client'
 import Box from '@material-ui/core/Box'
 import Container from '@material-ui/core/Container'
 import Paper from '@material-ui/core/Paper'
@@ -10,12 +9,12 @@ import TableHead from '@material-ui/core/TableHead'
 import TableRow from '@material-ui/core/TableRow'
 import Typography from '@material-ui/core/Typography'
 import React, { memo } from 'react'
-import { listShortUrlsQuery } from '../graphql/queries/list-shorturls'
+import { useListShortUrlsQuery } from '../graphql/codegen'
 import { theme } from '../style/theme'
 import { ShortUrlHistoryItem } from './shorturl-history-item'
 
 export const ShortUrlHistory = memo<{ onlyUser: boolean }>(({ onlyUser }) => {
-    const { loading, data } = useQuery(listShortUrlsQuery, {
+    const { loading, data } = useListShortUrlsQuery({
         pollInterval: 3000,
         variables: {
             onlyUser,

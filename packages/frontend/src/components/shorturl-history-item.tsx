@@ -1,4 +1,3 @@
-import { useMutation } from '@apollo/client'
 import Box from '@material-ui/core/Box'
 import IconButton from '@material-ui/core/IconButton'
 import Link from '@material-ui/core/Link'
@@ -9,15 +8,18 @@ import DeleteIcon from '@material-ui/icons/Delete'
 import FileCopyIcon from '@material-ui/icons/FileCopy'
 import React, { memo, useCallback, useContext, useRef } from 'react'
 import { UserIdContext } from '../authentication'
-import { deleteShortUrlMutation } from '../graphql/mutations/delete-shorturl'
-import { listShortUrlsQuery } from '../graphql/queries/list-shorturls'
+import {
+    ListShortUrlsDocument,
+    ShortUrl,
+    useDeleteShortUrlMutation,
+} from '../graphql/codegen'
 import { copyInputValueToClipboard } from '../utils/clipboard'
 import { createUrlFromShortUrlId } from '../utils/string/url-from-id'
 
 export const ShortUrlHistoryItem = memo<{
-    shortUrl: { id: number; url: string; userid?: string }
+    shortUrl: ShortUrl
 }>(({ shortUrl }) => {
-    const [deleteShortUrl] = useMutation(deleteShortUrlMutation)
+    const [deleteShortUrl] = useDeleteShortUrlMutation()
     const shortUrlInputRef = useRef<HTMLInputElement>(null)
     const copyOnClick = useCallback(() => {
         if (shortUrlInputRef.current) {
@@ -28,8 +30,11 @@ export const ShortUrlHistoryItem = memo<{
         deleteShortUrl({
             variables: { id: shortUrl.id },
             refetchQueries: [
-                { query: listShortUrlsQuery, variables: { onlyUser: false } },
-                { query: listShortUrlsQuery, variables: { onlyUser: true } },
+                {
+                    query: ListShortUrlsDocument,
+                    variables: { onlyUser: false },
+                },
+                { query: ListShortUrlsDocument, variables: { onlyUser: true } },
             ],
         })
     }, [deleteShortUrl, shortUrl.id])

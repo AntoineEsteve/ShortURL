@@ -1,0 +1,7 @@
+mutation CreateShortUrl($url: String!) {
+    createShortUrl(url: $url) {
+        id
+        url
+        userid
+    }
+}

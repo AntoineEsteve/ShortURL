@@ -1,9 +1,9 @@
-import { ApolloLink, useMutation } from '@apollo/client'
+import { ApolloLink } from '@apollo/client'
 import Alert from '@material-ui/lab/Alert'
 import { createContext, FC, useEffect } from 'react'
-import { anonymousSignInMutation } from './graphql/mutations/anonymous-sign-in'
+import { useAnonymousSignInMutation } from './graphql/codegen'
 
-export const UserIdContext = createContext<string>('')
+export const UserIdContext = createContext<number>(0)
 
 let authorizationToken = localStorage.getItem('authorizationToken')
 export const authenticationLink = new ApolloLink((operation, forward) => {
@@ -18,9 +18,7 @@ export const authenticationLink = new ApolloLink((operation, forward) => {
 })
 
 export const AuthenticationWrapper: FC = ({ children }) => {
-    const [anonymousSignIn, { data, error }] = useMutation(
-        anonymousSignInMutation,
-    )
+    const [anonymousSignIn, { data, error }] = useAnonymousSignInMutation()
     const userid = data?.anonymousSignIn?.userid
     useEffect(
         () =>

@@ -1,4 +1,3 @@
-import { useMutation } from '@apollo/client'
 import Box from '@material-ui/core/Box'
 import Button from '@material-ui/core/Button'
 import Container from '@material-ui/core/Container'
@@ -10,8 +9,10 @@ import FileCopyIcon from '@material-ui/icons/FileCopy'
 import UnfoldLessIcon from '@material-ui/icons/UnfoldLess'
 import { memo, useCallback, useRef } from 'react'
 import { Controller, useForm } from 'react-hook-form'
-import { createShortUrlMutation } from '../graphql/mutations/create-shorturl'
-import { listShortUrlsQuery } from '../graphql/queries/list-shorturls'
+import {
+    ListShortUrlsDocument,
+    useCreateShortUrlMutation,
+} from '../graphql/codegen'
 import { copyInputValueToClipboard } from '../utils/clipboard'
 import { createUrlFromShortUrlId } from '../utils/string/url-from-id'
 import { urlRegexp } from '../utils/string/url-validation'
@@ -24,7 +25,7 @@ export const ShortUrlCreationForm = memo(() => {
     const shortUrlInputRef = useRef<HTMLInputElement>(null)
     const { handleSubmit, errors, control, reset } = useForm<ShortUrlForm>()
     // TODO: Add types generated from the back?
-    const [createShortUrl, { data }] = useMutation(createShortUrlMutation)
+    const [createShortUrl, { data }] = useCreateShortUrlMutation()
     const shortUrl = data?.createShortUrl?.id
         ? createUrlFromShortUrlId(data.createShortUrl.id)
         : undefined
@@ -32,8 +33,11 @@ export const ShortUrlCreationForm = memo(() => {
         await createShortUrl({
             variables: { url },
             refetchQueries: [
-                { query: listShortUrlsQuery, variables: { onlyUser: false } },
-                { query: listShortUrlsQuery, variables: { onlyUser: true } },
+                {
+                    query: ListShortUrlsDocument,
+                    variables: { onlyUser: false },
+                },
+                { query: ListShortUrlsDocument, variables: { onlyUser: true } },
             ],
         })
         reset()

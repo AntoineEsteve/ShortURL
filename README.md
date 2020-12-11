@@ -59,12 +59,20 @@ npm run start
 
 App: http://localhost:3000
 
+If you change the GraphQL schema in the backend or the queries/mutations in the frontend, you will have to regenerate the types for the frontend package:
+
+```sh
+cd packages/frontend
+npm run codegen
+```
+
 ## Stack
 
 -   Backend:
     -   NodeJS
     -   Typescript
     -   GraphQL
+    -   graphql-code-generator
     -   Apollo
     -   Koa
     -   Prisma2
@@ -82,7 +90,7 @@ _Please note that I used this interview to test libraries (Prisma2, TypeGraphQL,
 
 ## Timeline
 
-Total time: ~14 hours
+Total time: ~15 hours
 
 ### Monday Nov. 30th
 
@@ -108,11 +116,17 @@ Total: ~10 hours
 
 Total: ~4 hours
 
+### Friday Dec. 11th
+
+-   2PM: Add graphql-code-generator to generate Typescript types from the schema for the frontend
+-   2:30PM: Minor UI improvements
+
+Total: ~1 hour
+
 ## Things missing
 
 -   Unit tests (as I didn't know most of those libs I don't know the best practices to test them)
 -   Handle errors & loading states
--   GraphQL types in the frontend
 -   Use subscriptions instead of pooling to refresh the lists
 -   Update the cache when deleting/adding ShortURLs instead of refetching everything
 -   Improve the UI to support smaller devices (<550px width) and to have better
